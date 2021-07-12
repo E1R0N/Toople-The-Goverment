@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LogicaPersonaje2 : MonoBehaviour
+public class LogicaBryan : MonoBehaviour
 {
     private Animator anim;
     public float x, y;
