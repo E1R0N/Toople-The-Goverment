@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class Message1 : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public TextMesh medidor=new TextMesh();
+    
+    void OnCollisionEnter(Collision col){
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if (col.gameObject.tag == "personaje2"){
+
+             medidor.text=("Hola!!! Estamos empezando una revolucion contra este gobierno tan dictador.");
+             
+        }
+       
     }
+    
+    
 }
