@@ -18,17 +18,13 @@ public class LogicaBarraVida : MonoBehaviour
     void Update()
     {
         RevisarVida();
+        
         if (vidaActual <= 0)
         {
-            Invoke("ReiniciarJuego", 2f);
+            gameObject.SetActive(false);
         }
     }
-
-    void ReinciarJuego ()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }
-
+    
     public void RevisarVida()
     {
         imagenBarraVida.fillAmount = vidaActual / vidaMax;

@@ -13,6 +13,10 @@ public class LogicaPersonaje1 : MonoBehaviour
     public Rigidbody rb;
     public float fuerzaDeSalto = 8f;
     public bool puedoSaltar;
+
+    public bool estoyAtacando;
+    public bool avanzoSolo;
+    public float impulsoDeGolpe = 10f;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,8 +26,16 @@ public class LogicaPersonaje1 : MonoBehaviour
 
     void FixedUpdate()
     {
-        transform.Rotate(0, x * Time.deltaTime * velocidadRotacion, 0);
+        if (!estoyAtacando)
+        {
+            transform.Rotate(0, x * Time.deltaTime * velocidadRotacion, 0);
         transform.Translate(0,0,y*Time.deltaTime*velocidadMovimiento);
+        }
+        
+        if (avanzoSolo)
+        {
+            rb.velocity = transform.forward * impulsoDeGolpe;
+        }
     }
 
     // Update is called once per frame
@@ -32,18 +44,28 @@ public class LogicaPersonaje1 : MonoBehaviour
         x = Input.GetAxis("Horizontal");
         y = Input.GetAxis("Vertical");
 
+        if (Input.GetKeyDown(KeyCode.Return) && puedoSaltar && !estoyAtacando)
+        {
+            anim.SetTrigger("golpeo");
+            estoyAtacando = true;
+        }
+
         anim.SetFloat("VelX", x);
         anim.SetFloat("VelY", y);
 
         if(puedoSaltar)
         {
-            if(Input.GetKeyDown(KeyCode.Space))
+            if (!estoyAtacando)
             {
-                anim.SetBool("salte", true);
-                rb.AddForce(new Vector3(0, fuerzaDeSalto,0),ForceMode.Impulse);
+                if(Input.GetKeyDown(KeyCode.Space))
+                {
+                    anim.SetBool("salte", true);
+                    rb.AddForce(new Vector3(0, fuerzaDeSalto,0),ForceMode.Impulse);
+                }
             }
             anim.SetBool("tocoSuelo", true);
-        }else
+        }
+        else
         {
             EstoyCayendo();
         }
@@ -53,5 +75,20 @@ public class LogicaPersonaje1 : MonoBehaviour
     {
         anim.SetBool("tocoSuelo", false);
         anim.SetBool("salte", false);
+    }
+
+    public void DejoDeGolpear()
+    {
+        estoyAtacando = false;
+    }
+
+    public void AnanzoSolo()
+    {
+        avanzoSolo = true;
+    }
+
+    public void DejoDeAvanzar()
+    {
+        avanzoSolo = false;
     }
 }
