@@ -15,7 +15,7 @@ public class PruebaDaño : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetKeyDown(KeyCode.Q))
         {
             LogicaBarraVidaJugador.vidaActual -= daño;
         }

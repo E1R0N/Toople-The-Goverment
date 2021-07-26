@@ -44,7 +44,7 @@ public class LogicaPersonaje1 : MonoBehaviour
         x = Input.GetAxis("Horizontal");
         y = Input.GetAxis("Vertical");
 
-        if (Input.GetKeyDown(KeyCode.Return) && puedoSaltar && !estoyAtacando)
+        if (Input.GetMouseButton(0) && puedoSaltar && !estoyAtacando)
         {
             anim.SetTrigger("golpeo");
             estoyAtacando = true;
