@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LogicaPersonaje1 : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class LogicaPersonaje1 : MonoBehaviour
     public Rigidbody rb;
     public float fuerzaDeSalto = 8f;
     public bool puedoSaltar;
+
+    public string levelname;
 
     public bool estoyAtacando;
     public bool avanzoSolo;
@@ -69,6 +72,11 @@ public class LogicaPersonaje1 : MonoBehaviour
         {
             EstoyCayendo();
         }
+
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            SceneManager.LoadScene(levelname);
+        }    
     }
     
     public void EstoyCayendo()
