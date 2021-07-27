@@ -5,6 +5,7 @@ using UnityEngine;
 public class LogicaEnemigo : MonoBehaviour
 {
     public int hp;
+    public int dañoArma;
     public int dañoPuño;
 
     void Start()
@@ -19,6 +20,11 @@ public class LogicaEnemigo : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (other.gameObject.tag == "armaImpacto")
+        {
+            hp -= dañoArma;   
+        }
+
         if (other.gameObject.tag == "golpeImpacto")
         {
             hp -= dañoPuño;   

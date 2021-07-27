@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class LogicaPersonaje1 : MonoBehaviour
 {
+public bool conArma;
+
     public float velocidadMovimiento = 5.0f;
     public float velocidadRotacion = 200.0f;
 
@@ -49,8 +51,16 @@ public class LogicaPersonaje1 : MonoBehaviour
 
         if (Input.GetMouseButton(0) && puedoSaltar && !estoyAtacando)
         {
-            anim.SetTrigger("golpeo");
-            estoyAtacando = true;
+            if (conArma)
+            {
+                anim.SetTrigger("golpeo2");
+                estoyAtacando = true;
+            }
+            else
+            {
+                anim.SetTrigger("golpeo");
+                estoyAtacando = true;
+            }
         }
 
         anim.SetFloat("VelX", x);
